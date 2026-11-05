@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-NZ">
-<head>
 <!-- © Ute Poelman. All rights reserved. Terms of use: https://nugget-maths.co.nz/#terms -->
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nugget's Number Lines</title>
@@ -52,8 +52,8 @@ button:focus-visible,select:focus-visible,input:focus-visible,.pt:focus-visible{
 .q p{margin:4px 0}
 .q svg{width:100%;height:auto;display:block}
 .nm{display:flex;justify-content:space-between;margin:6px 0 12px}
-.pg{display:block;break-after:page;page-break-after:always}
-.key{display:block;break-before:page;page-break-before:always}
+.pb{display:block;height:0;margin:0;padding:0;border:0;break-after:page;page-break-after:always}
+.key{display:block;break-before:page;page-break-before:always;margin-top:24px;padding-top:12px;border-top:2px dashed var(--grid)}
 /* overlay */
 .ov{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:50;padding:12px}
 .modal{background:var(--card);border:4px solid var(--acc);border-radius:16px;padding:22px;max-width:440px;width:100%;text-align:center}
@@ -80,7 +80,8 @@ button:focus-visible,select:focus-visible,input:focus-visible,.pt:focus-visible{
  header,.tabs,#practise,.noprint,.ov{display:none!important}
  #wsec{display:block!important}
  main{padding:0;max-width:none}
- .sheet{border:0;padding:0;max-width:none}
+ .sheet{border:0;padding:0;max-width:none;display:block}
+ .key{border-top:0;margin-top:0;padding-top:0;break-before:page!important;page-break-before:always!important}
  .cert{margin:0 auto;border-width:8px}
 }
 </style>
@@ -136,7 +137,7 @@ button:focus-visible,select:focus-visible,input:focus-visible,.pt:focus-visible{
 <section id="wsec">
  <div class="card noprint">
   <div class="bar">
-   <label>Questions: <select id="wn"><option>3</option><option>4</option><option selected>5</option><option>6</option></select></label>
+   <label>Questions: <select id="wn"><option>3</option><option>4</option><option selected>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></label>
    <label>Numbers: <select id="wtype">
     <option value="mixed">Mixed</option><option value="whole">Whole numbers</option>
     <option value="decimals">Decimals</option><option value="negatives">Including negatives</option></select></label>
@@ -358,7 +359,7 @@ function drawSheet(){
  qs.forEach((r,k)=>{h+=`<div class="q"><p><b>${k+1}.</b> Show the range <b>[${fmt(r[0])}, ${fmt(r[1])}]</b></p>${svg([],{})}</div>`});
  h+='</div>';
  if(withKey){
-  h+=`<div class="key"><h2>Answer key</h2><p>One good choice for each question (other scales can also work):</p><ol>`;
+  h+=`<div class="pb" aria-hidden="true"></div><div class="key"><h2>Answer key (prints on its own page)</h2><p>One good choice for each question (other scales can also work):</p><ol>`;
   qs.forEach(r=>{const s=bestStep(...r),st=clean(Math.floor(r[0]/s+1e-9)*s);
    h+=`<li>[${fmt(r[0])}, ${fmt(r[1])}]: ${fmt(s)} per square, starting at ${fmt(st)} (the grid ends at ${fmt(clean(st+30*s))}).</li>`});
   h+='</ol></div>';
